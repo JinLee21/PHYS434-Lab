@@ -56,7 +56,7 @@ p3 = cdf('Exponential',x3,5)
 % ptobability 3<x3<6 = 0.3057
 
 % converting probability into sigma
-sigmaProblem3 = norminv(0.3057)
+sigmaProblem3 = expinv(0.3057,5)
 % #4: Another hypothetical value
 % creating random exponential distribution
 x4 = linspace(0,30,30);
@@ -69,11 +69,10 @@ p4 = cdf('Exponential',x4,2)
 % probability 15<x4<20 = 0.0006
 
 % converting probability into sigma
-sigmaProblem4 = norminv(0.0006)
+sigmaProblem4 = expinv(0.0006,2)
 % When a distribution is exponential, the probability gets smaller as x value 
 % gets bigger, and as probability gets smaller, the absolute value of sigma 
-% gets bigger. Also, it is observed that there is always a minus sign, when 
-% probability is converted into sigma.
+% gets bigger.
 
 
 
@@ -81,14 +80,16 @@ sigmaProblem4 = norminv(0.0006)
 x5 = 0:30;
 poisson = makedist("Poisson", 'lambda',5); 
 subplot(1,2,2)
-stairs(x5-0.5,pdf(poisson,x),"LineWidth",2);
+stairs(x5-0.5,pdf(poisson,x5),"LineWidth",2);
 set(gca,'YScale','log')
 subplot(1,2,1)
-stairs(x5-0.5,pdf(poisson,x),"LineWidth",2);
+stairs(x5-0.5,pdf(poisson,x5),"LineWidth",2);
 % What is the probability of getting x5 = 5?
 p5 = cdf('Poisson',5)
 % Poisson distribution is discete, the probability is also discrete, and its
 % probability at any x5 will be always 1.
 pPoisson = cdf('Poisson',x5)
-% Probabilities and sigma does not change continuously, however, mean and
-% variance changes continuously.
+% Probability is discrete, however, the average chagnes continuously
+% because, in Poisson distribution, mu is the average number of
+% successes in a specific time interval, therefore, the average is not
+% always integer.
